@@ -1,0 +1,13 @@
+name: Windows x64 · PowerShell quality
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  powershell:
+    uses: Kataglyphis/ANTfrastructure/.github/workflows/powershell-quality.yml@develop
+    with:
+      lint-path: .github/actions/nvcc-toolchain/install-cuda.ps1
+      strict: true

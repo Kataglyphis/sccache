@@ -53,6 +53,16 @@ cargo clippy --locked --all-targets -- -D warnings -A unknown-lints \
 cargo test --locked --lib --bins --tests
 ```
 
+The shared ANTfrastructure CI workflows also upload size, complexity and duplication
+measurements on pushes and PRs. The PowerShell workflow enforces PSScriptAnalyzer and
+complexity for `.github/actions/nvcc-toolchain/install-cuda.ps1`; run its local equivalents
+from the repository root when changing that file:
+
+```pwsh
+pwsh -File third_party/ANTfrastructure/windows/scripts/Invoke-Lint.ps1 -Path .github/actions/nvcc-toolchain/install-cuda.ps1 -FailOnAnalyzer
+pwsh -File third_party/ANTfrastructure/windows/scripts/Invoke-CodeComplexity.ps1 -Path .github/actions/nvcc-toolchain/install-cuda.ps1 -Root . -Strict
+```
+
 Also keep in mind:
 
 - MSRV is the `rust-version` in `Cargo.toml` (kept in sync with `README.md` and
